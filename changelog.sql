@@ -145,20 +145,29 @@ ALTER TABLE issues
     ADD CONSTRAINT issues_issuer_id_fkey
         FOREIGN KEY (issuer_id) REFERENCES usr(id) ON DELETE CASCADE ON UPDATE CASCADE;
 
-/* Renaming report_remote to reported_remote & Changing fkey action */
+/* Renaming report_remote to reported_remote */
 ALTER TABLE report_remote
-    RENAME TO reported_remote,
+    RENAME TO reported_remote;
+
+/* Chaging reported_remotes table fkey action*/
+ALTER TABLE reported_remote
     ALTER COLUMN issuer_id DROP NOT NULL,
     DROP CONSTRAINT report_issuer_id_fkey,
-    ADD CONSTRAINT report_issuer_id_fkey
+    ADD CONSTRAINT reported_remote_issuer_id_fkey
         FOREIGN KEY (issuer_id) REFERENCES usr(id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /* Chaging reported_usr table fkey action*/
 ALTER TABLE reported_usr
     ALTER COLUMN issuer_id DROP NOT NULL,
-    DROP CONSTRAINT report_issuer_id_fkey,
-    ADD CONSTRAINT report_issuer_id_fkey
+    DROP CONSTRAINT reported_usr_issuer_id_fkey,
+    ADD CONSTRAINT report_usr_issuer_id_fkey
         FOREIGN KEY (issuer_id) REFERENCES usr(id) ON DELETE CASCADE ON UPDATE CASCADE;
 
+/***************/
+/* Changeset 4 */
+/***************/
 
+-- changeset princebillyg:4
 
+/* Chaing issues to issue */
+ALTER TABLE issues RENAME TO issue;
