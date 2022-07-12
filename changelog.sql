@@ -128,7 +128,7 @@ ALTER TABLE report RENAME TO report_remote;
 
 -- changeset princebillygk:3
 /* Password is more convenient I think */
-ALTER TABLE user_email_auth RENAME COLUMN pass to password;
+ALTER TABLE usr_email_auth RENAME COLUMN pass to password;
 
 /* Adding email to user table */
 ALTER TABLE su ADD COLUMN email VARCHAR(255) NOT NULL;
@@ -147,15 +147,15 @@ ALTER TABLE issues
 
 /* Renaming report_remote to reported_remote & Changing fkey action */
 ALTER TABLE report_remote
-    RENAME TO reported_remote;
-    ALTER COLUMN issuer_id DROP NOT NULL;
+    RENAME TO reported_remote,
+    ALTER COLUMN issuer_id DROP NOT NULL,
     DROP CONSTRAINT report_issuer_id_fkey,
     ADD CONSTRAINT report_issuer_id_fkey
         FOREIGN KEY (issuer_id) REFERENCES usr(id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /* Chaging reported_usr table fkey action*/
 ALTER TABLE reported_usr
-    ALTER COLUMN issuer_id DROP NOT NULL;
+    ALTER COLUMN issuer_id DROP NOT NULL,
     DROP CONSTRAINT report_issuer_id_fkey,
     ADD CONSTRAINT report_issuer_id_fkey
         FOREIGN KEY (issuer_id) REFERENCES usr(id) ON DELETE CASCADE ON UPDATE CASCADE;
